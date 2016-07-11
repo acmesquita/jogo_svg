@@ -17,11 +17,43 @@ $(document).ready(function () {
 
 	};
 	
+
+
+	function move_bola(e) {
+		
+		var bola = $("#bola");
+		var canvas = $("#canvas");
+
+		var xBola = parseInt(bola.attr('cx'));
+		var yBola = parseInt(bola.attr('cy'));
+
+		var largura = parseInt(canvas.attr('width'));
+		var altura = parseInt(canvas.attr('height'));
+
+		if(yBola >= 480 && xBola >=480){
+			bola.attr('cx', 20);
+			bola.attr('cy', 20);
+		}
+		else{
+			xBola += 10;
+		}
+		
+		if( yBola >= altura){
+			yBola = altura;
+		}
+		else{
+			yBola += 10;
+		}
+
+		bola.attr('cx', xBola);
+		bola.attr('cy', yBola);
+	}
+
 	function move_barra(e) {		
 
 		$(document).keydown(function (e) {
 			var barra = $("#barra");
-		
+
 			if(e.keyCode == 39){
 				var x = parseInt(barra.attr('x'));
 				if(x >= 490){
@@ -47,4 +79,11 @@ $(document).ready(function () {
 	};
 
 	move_barra();
+	
+	move_bola();
+
+	main();
+	function main(e) {
+		setInterval(move_bola, 200);
+	}
 });
