@@ -34,16 +34,12 @@ $(document).ready(function () {
 			bola.attr('cx', 20);
 			bola.attr('cy', 20);
 		}
+		
 		else{
 			xBola += 10;
-		}
-		
-		if( yBola >= altura){
-			yBola = altura;
-		}
-		else{
 			yBola += 10;
 		}
+		
 
 		bola.attr('cx', xBola);
 		bola.attr('cy', yBola);
