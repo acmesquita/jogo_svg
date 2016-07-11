@@ -1,0 +1,26 @@
+<html>
+<head>
+<title>Trabalhando com eventos de teclado em jQuery</title>
+<script src="jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+$("#meutexto").keypress(function(e){
+e.preventDefault();
+$("#oescrito").html(e.which + ": " + String.fromCharCode(e.which))
+});
+})
+</script>
+
+</head>
+<body>
+<h1>Eventos de teclado em jQuery</h1>
+<h2>Verificar que tecla está sendo pressionada</h2>
+<form>
+<textarea cols=30 rows=2 id="meutexto">Escreva algo aqui!</textarea>
+<br>
+<b>Tecla pressionada:</b>
+<br>
+<div id="oescrito"></div>
+</form>
+</body>
+</html>
