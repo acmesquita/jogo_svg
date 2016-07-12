@@ -1,24 +1,5 @@
 $(document).ready(function () {
 
-	bola = {
-		x: 20,
-		y: 20,
-		velocidade: 10,
-		direcao: 1,
-
-		move_bola:function() {
-			var bola = $("#bola");
-			var y = parseInt(bola.attr('cy'));
-			while(y < 480){
-				y += 10;
-				bola.attr('cy',y)
-			}
-		}
-
-	};
-	
-
-
 	function move_bola(e) {
 		
 		var bola = $("#bola");
@@ -78,8 +59,50 @@ $(document).ready(function () {
 	
 	move_bola();
 
+
+
+
+/* GLOBAL VARS */
+	var bola = $("#bola");
+	var canvas = $("#canvas");
+
+	var xBola = parseInt(bola.attr('cx'));
+	var yBola = parseInt(bola.attr('cy'));
+	var rBola = parseInt(bola.attr('r'));
+
+	var largura = parseInt(canvas.attr('width'));
+	var altura = parseInt(canvas.attr('height'));
+
+	var velocityX = 5;
+	var velocityY = 7;
+
+/* MOVE FUNCTIOON */
+	function moveBola(){
+		/*Move no X*/
+		if(xBola < rBola || xBola > largura - rBola){
+			velocityX *= (-1);
+		}
+		xBola += velocityX;
+		bola.attr('cx', xBola);
+
+		/*Move no Y*/
+		if(yBola < rBola || yBola > altura - rBola){
+			velocityY *= (-1);
+		}
+		yBola += velocityY;
+		bola.attr('cy', yBola);
+	}
+
+
+	function set_yVelocity(){
+		console.log($("#vY").val());
+		velocityY = $("#vY").val();
+	}
+
+
 	main();
 	function main(e) {
-		setInterval(move_bola, 200);
+		//setInterval(move_bola, 200);
+		setInterval(moveBola, 15);
 	}
 });
