@@ -1,4 +1,26 @@
+/* GLOBAL VARS */
+var bola, canvas;
+var xBola, yBola, rBola;
+var largura, altura;
+var velocityX, velocityY;
+
+
 $(document).ready(function () {
+
+/* Init variables */
+	bola = $("#bola");
+	canvas = $("#canvas");
+
+	xBola = parseInt(bola.attr('cx'));
+	yBola = parseInt(bola.attr('cy'));
+	rBola = parseInt(bola.attr('r'));
+
+	largura = parseInt(canvas.attr('width'));
+	altura = parseInt(canvas.attr('height'));
+
+	velocityX = 5;
+	velocityY = 7;
+
 
 	function move_bola(e) {
 		
@@ -60,22 +82,6 @@ $(document).ready(function () {
 	move_bola();
 
 
-
-
-/* GLOBAL VARS */
-	var bola = $("#bola");
-	var canvas = $("#canvas");
-
-	var xBola = parseInt(bola.attr('cx'));
-	var yBola = parseInt(bola.attr('cy'));
-	var rBola = parseInt(bola.attr('r'));
-
-	var largura = parseInt(canvas.attr('width'));
-	var altura = parseInt(canvas.attr('height'));
-
-	var velocityX = 5;
-	var velocityY = 7;
-
 /* MOVE FUNCTIOON */
 	function moveBola(){
 		/*Move no X*/
@@ -93,16 +99,14 @@ $(document).ready(function () {
 		bola.attr('cy', yBola);
 	}
 
-
-	function set_yVelocity(){
-		console.log($("#vY").val());
-		velocityY = $("#vY").val();
-	}
-
-
 	main();
 	function main(e) {
 		//setInterval(move_bola, 200);
 		setInterval(moveBola, 15);
 	}
 });
+
+function set_velocity(){
+	velocityX = parseInt( $("#vX").val() );
+	velocityY = parseInt( $("#vY").val() );
+}
