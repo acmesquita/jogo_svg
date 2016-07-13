@@ -6,6 +6,7 @@ var largura, altura;
 var velocityX, velocityY, velocityBarra;
 var score = 0;
 var divScore;
+var mousex;
 
 /*Para testes*/
 
@@ -37,12 +38,35 @@ $(document).ready(function () {
 
 	velocityX = 3;
 	velocityY = 2;
-	velocityBarra = 10;
+	velocityBarra = 5;
+	mousex = 0;
 
 
-	function move_barra(e) {		
+	function move_barra(e) {
 
-		$(document).keydown(function (e) {
+		$("html").mousemove(function(mouse){
+			var mouseAtual = mouse.pageX;
+			
+			if(mouseAtual >= 0 && mouseAtual <= largura){
+				if((mouseAtual) > mousex){
+					xBarra += velocityBarra;
+					if(xBarra > (largura - larguraBarra)){
+						xBarra = largura - larguraBarra;
+					}
+				}
+				else{
+					xBarra -= velocityBarra;
+					if(xBarra < 0 ){
+						xBarra = 0;
+					}
+				}
+				barra.attr('x',xBarra);
+				mousex = mouseAtual;
+			}
+
+		});		
+
+		/*$(document).keypress(function (e) {
 
 			if(e.keyCode == 39){
 				xBarra += velocityBarra;
@@ -59,7 +83,7 @@ $(document).ready(function () {
 				}
 				barra.attr('x',xBarra);
 			}
-		});
+		});*/
 
 	};
 
@@ -88,12 +112,12 @@ $(document).ready(function () {
 		/*Checar se colidiu com a barra*/
 		if(yBola > (altura - (rBola + alturaBarra + alturaBarra)))
 		{
-			if((xBola + rBola) >= xBarra && (xBola + rBola) <= (xBarra + larguraBarra) ){
+			if((xBola + rBola) >= xBarra && (xBola + rBola) <= (xBarra + larguraBarra + rBola) ){
 				
 				if(score % 5 == 0){
 					velocityX += 0.5;
 					velocityY += 0.5;
-					velocityBarra += 5;
+					velocityBarra += 0.5;
 				}
 
 				score += 1;
